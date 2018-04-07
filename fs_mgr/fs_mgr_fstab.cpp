@@ -492,8 +492,11 @@ static struct fstab *fs_mgr_read_fstab_file(FILE *fstab_file)
     entries = 0;
     while ((len = getline(&line, &alloc_len, fstab_file)) != -1) {
         /* if the last character is a newline, shorten the string by 1 byte */
-        if (line[len - 1] == '\n') {
-            line[len - 1] = '\0';
+        if( len > 0 ) {
+            while (line[len - 1] == '\n' || line[len - 1] == '\r') {
+                line[len - 1] = '\0';
+                len--;
+            }   
         }
         /* Skip any leading whitespace */
         p = line;
