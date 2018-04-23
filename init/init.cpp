@@ -1018,7 +1018,7 @@ int main(int argc, char** argv) {
         mkdir("/dev/socket", 0755);
         mount("devpts", "/dev/pts", "devpts", 0, NULL);
         #define MAKE_STR(x) __STRING(x)
-        mount("proc", "/proc", "proc", 0, "hidepid=2,gid=" MAKE_STR(AID_READPROC));
+        mount("proc", "/proc", "proc", 0, "hidepid=0,gid=" MAKE_STR(AID_READPROC));
         // Don't expose the raw commandline to unprivileged processes.
         chmod("/proc/cmdline", 0440);
         gid_t groups[] = { AID_READPROC };
